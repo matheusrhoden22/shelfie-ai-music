@@ -1,0 +1,5 @@
+{
+  "name": "Shelfie AI",
+  "description": "A smart 3D bookshelf organizer populated with best-selling books and powered by Gemini for recommendations.",
+  "requestFramePermissions": []
+}
