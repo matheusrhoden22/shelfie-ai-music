@@ -103,7 +103,7 @@ const App: React.FC = () => {
            <div className="text-center md:text-left">
                {/* Title kept as strictly requested */}
                <h1 className="text-5xl md:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-3 tracking-tight">
-                 Personal playlist - Find the best spotify songs
+                 Personal playlist 
                </h1>
                <div className="flex items-center justify-center md:justify-start gap-3">
                  <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)]"></span>
