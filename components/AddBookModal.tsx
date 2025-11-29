@@ -97,10 +97,6 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, onClose, onA
             </button>
           </div>
         </form>
-        
-        <div className="mt-8 flex justify-center">
-             <span className="text-[10px] text-gray-600 font-mono uppercase tracking-widest">Powered by Google Gemini 2.5</span>
-        </div>
       </div>
     </div>
   );
