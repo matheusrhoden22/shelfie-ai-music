@@ -1,13 +1,13 @@
-
 import React, { useState, useMemo } from 'react';
 import { Header } from './components/Header';
 import { Shelf } from './components/Shelf';
 import { AddBookModal } from './components/AddBookModal';
 import { Song, SortOption } from './types';
-import { INITIAL_SONGS } from './constants';
+// Removida a importação de INITIAL_SONGS para começar limpo
 
 const App: React.FC = () => {
-  const [songs, setSongs] = useState<Song[]>(INITIAL_SONGS);
+  // 1. App começa vazio (array vazio [])
+  const [songs, setSongs] = useState<Song[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState<SortOption>(SortOption.DateAdded);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -76,6 +76,13 @@ const App: React.FC = () => {
     });
   };
 
+  // 2. Função para limpar a biblioteca
+  const handleClearLibrary = () => {
+    if (window.confirm('Are you sure you want to clear your entire library? This cannot be undone.')) {
+      setSongs([]);
+    }
+  };
+
   return (
     <div className="min-h-screen pb-32 bg-[#050505] text-white relative selection:bg-blue-500 selection:text-white">
       {/* Ambient Background Effects */}
@@ -94,6 +101,7 @@ const App: React.FC = () => {
         {/* Controls Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 mx-auto max-w-7xl">
            <div className="text-center md:text-left">
+               {/* Title kept as strictly requested */}
                <h1 className="text-5xl md:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-3 tracking-tight">
                  Personal playlist - Find the best spotify songs
                </h1>
@@ -105,21 +113,38 @@ const App: React.FC = () => {
                </div>
            </div>
 
-           {/* Modern Category Filter */}
-           <div className="flex flex-col items-end gap-2">
-                <label className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em]">Filter Frequency</label>
-                <div className="relative group min-w-[200px]">
-                    <select 
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="w-full appearance-none bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 text-white py-3 pl-5 pr-12 rounded-xl cursor-pointer focus:outline-none focus:ring-1 focus:ring-white/30 transition-all font-display font-medium text-sm shadow-xl"
-                    >
-                        {genres.map(g => <option key={g} value={g} className="bg-[#111] text-gray-300">{g}</option>)}
-                    </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400 group-hover:text-white transition-colors">
-                        <svg className="h-4 w-4 fill-current transform group-hover:rotate-180 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-                        </svg>
+           {/* Right Side: Clear Button & Filter */}
+           <div className="flex flex-col items-end gap-6">
+                
+                {/* 2. Botão Clear Library (Só aparece se houver músicas) */}
+                {songs.length > 0 && (
+                  <button 
+                    onClick={handleClearLibrary}
+                    className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 hover:border-red-500/40 rounded-lg text-red-400 hover:text-red-300 transition-all text-xs font-bold uppercase tracking-wider group"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 opacity-70 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Clear Library
+                  </button>
+                )}
+
+                {/* Modern Category Filter */}
+                <div className="flex flex-col items-end gap-2">
+                    <label className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em]">Filter Frequency</label>
+                    <div className="relative group min-w-[200px]">
+                        <select 
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            className="w-full appearance-none bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 text-white py-3 pl-5 pr-12 rounded-xl cursor-pointer focus:outline-none focus:ring-1 focus:ring-white/30 transition-all font-display font-medium text-sm shadow-xl"
+                        >
+                            {genres.map(g => <option key={g} value={g} className="bg-[#111] text-gray-300">{g}</option>)}
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400 group-hover:text-white transition-colors">
+                            <svg className="h-4 w-4 fill-current transform group-hover:rotate-180 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
            </div>
