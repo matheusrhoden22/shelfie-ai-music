@@ -95,7 +95,7 @@ const App: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 mx-auto max-w-7xl">
            <div className="text-center md:text-left">
                <h1 className="text-5xl md:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-3 tracking-tight">
-                 Rotation
+                 My personal Song Library
                </h1>
                <div className="flex items-center justify-center md:justify-start gap-3">
                  <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)]"></span>
